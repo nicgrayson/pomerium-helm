@@ -74,6 +74,11 @@ spec:
         - name: {{ $name }}
           value: {{ quote $value }}
 {{- end }}
+{{- range $name, $value := .Values.extraEnvValueFrom }}
+        - name: {{ $name }}
+          valueFrom:
+{{- toYaml $value | nindent 12 }}
+{{- end }}
 {{- range $name, $value := .Values.authorize.deployment.extraEnv }}
         - name: {{ $name }}
           value: {{ quote $value }}
